@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Sentiment Analyzer</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="script.js" defer></script>
 </head>
 <body>
 <div class="container mt-5">
-    <h2>🧠 Sentiment Analyzer für Kundenbewertungen</h2>
-    <p>Gib eine Bewertung ein (Deutsch oder Englisch):</p>
-    <textarea id="textInput" class="form-control" rows="5" placeholder="Ihre Meinung..."></textarea>
-    <button id="analyzeBtn" class="btn btn-success mt-3">Analysieren</button>
+    <h2>🧠 Sentiment Analyzer for Customer Reviews</h2>
+    <p>Enter a review in English:</p>
+    <textarea id="textInput" class="form-control" rows="5" placeholder="Ex. This product was terrible or this product was great..."></textarea>
+    <button id="analyzeBtn" class="btn btn-success mt-3">Analyze</button>
+
     <div id="resultBox" class="mt-4" style="display: none;">
-        <h4>Erkanntes Sentiment:</h4>
-        <p id="sentiment" class="lead"></p>
+        <h4>Recognized sentiment:</h4>
+        <p class="lead">
+            <strong id="sentimentLabel">–</strong><br>
+            Trust value: <span id="sentimentScore">–</span>
+        </p>
     </div>
 </div>
 </body>

@@ -1,8 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     const analyzeBtn = document.getElementById("analyzeBtn");
     const textInput = document.getElementById("textInput");
-    const sentimentOutput = document.getElementById("sentiment");
+    const sentimentLabel = document.getElementById("sentimentLabel");
+    const sentimentScore = document.getElementById("sentimentScore");
     const resultBox = document.getElementById("resultBox");
+
+    const labelMapping = {
+        "LABEL_0": "Negativ 😠",
+        "LABEL_1": "Neutral 😐",
+        "LABEL_2": "Positiv 😊"
+    };
 
     analyzeBtn.addEventListener("click", async () => {
         const text = textInput.value.trim();
@@ -15,7 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const data = await response.json();
-        sentimentOutput.textContent = `${data.sentiment.toUpperCase()} (${data.raw})`;
+        sentimentLabel.textContent = labelMapping[data.sentiment] || data.sentiment;
+        sentimentScore.textContent = `${Math.round(data.score * 100)}%`;
         resultBox.style.display = "block";
     });
 });

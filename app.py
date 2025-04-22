@@ -3,8 +3,8 @@ from transformers import pipeline
 
 app = Flask(__name__, static_url_path='/', static_folder='web')
 
-# Lade multilingualen Sentiment-Analyzer von HuggingFace
-classifier = pipeline("sentiment-analysis", model="nlptown/bert-base-multilingual-uncased-sentiment")
+# Leichtes Modell ohne torch
+sentiment_pipeline = pipeline("sentiment-analysis", model="cardiffnlp/twitter-roberta-base-sentiment-latest")
 
 @app.route("/")
 def index():
@@ -12,20 +12,13 @@ def index():
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
-    data = request.get_json()
-    text = data.get("text", "")
-    result = classifier(text)[0]
-    label = result['label']  # z. B. "4 stars"
-    
-    # Vereinfachtes Mapping
-    if "1" in label or "2" in label:
-        sentiment = "negative"
-    elif "3" in label:
-        sentiment = "neutral"
-    else:
-        sentiment = "positive"
+    text = request.get_json().get("text", "")
+    result = sentiment_pipeline(text)[0]
 
-    return jsonify({"sentiment": sentiment, "raw": label})
+    label = result['label']
+    score = round(result['score'], 2)
+
+    return jsonify({"sentiment": label, "score": score})
 
 if __name__ == "__main__":
     app.run(debug=True)
