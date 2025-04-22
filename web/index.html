@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analyzer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+<div class="container mt-5">
+    <h2>🧠 Sentiment Analyzer für Kundenbewertungen</h2>
+    <p>Gib eine Bewertung ein (Deutsch oder Englisch):</p>
+    <textarea id="textInput" class="form-control" rows="5" placeholder="Ihre Meinung..."></textarea>
+    <button id="analyzeBtn" class="btn btn-success mt-3">Analysieren</button>
+    <div id="resultBox" class="mt-4" style="display: none;">
+        <h4>Erkanntes Sentiment:</h4>
+        <p id="sentiment" class="lead"></p>
+    </div>
+</div>
+</body>
+</html>
