@@ -1,29 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const analyzeBtn = document.getElementById("analyzeBtn");
-    const textInput = document.getElementById("textInput");
-    const sentimentLabel = document.getElementById("sentimentLabel");
-    const sentimentScore = document.getElementById("sentimentScore");
-    const resultBox = document.getElementById("resultBox");
+    const btn = document.getElementById("berechnenBtn");
 
-    const labelMapping = {
-        "LABEL_0": "Negativ 😠",
-        "LABEL_1": "Neutral 😐",
-        "LABEL_2": "Positiv 😊"
-    };
+    btn.addEventListener("click", async () => {
+        const strecke = parseFloat(document.getElementById("strecke").value);
+        const verbrauch = parseFloat(document.getElementById("verbrauch").value);
+        const preis = parseFloat(document.getElementById("preis").value);
 
-    analyzeBtn.addEventListener("click", async () => {
-        const text = textInput.value.trim();
-        if (!text) return;
-
-        const response = await fetch("/analyze", {
+        const response = await fetch("/calculate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text })
+            body: JSON.stringify({ strecke, verbrauch, preis })
         });
 
         const data = await response.json();
-        sentimentLabel.textContent = labelMapping[data.sentiment] || data.sentiment;
-        sentimentScore.textContent = `${Math.round(data.score * 100)}%`;
-        resultBox.style.display = "block";
+
+        if (data.kosten !== undefined) {
+            document.getElementById("kostenOutput").textContent = data.kosten.toFixed(2);
+            document.getElementById("ergebnis").style.display = "block";
+        } else {
+            alert("Fehler: " + (data.error || "Ungültige Eingaben"));
+        }
     });
 });

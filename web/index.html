@@ -2,25 +2,34 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Sentiment Analyzer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tankkostenrechner</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="script.js" defer></script>
 </head>
 <body>
 <div class="container mt-5">
-    <h2>🧠 Sentiment Analyzer for Customer Reviews</h2>
-    <p>Enter a review in English:</p>
-    <textarea id="textInput" class="form-control" rows="5" placeholder="Ex. This product was terrible or this product was great..."></textarea>
-    <button id="analyzeBtn" class="btn btn-success mt-3">Analyze</button>
+    <h2>⛽ Tankkostenrechner</h2>
+    <p>Berechne die Tankkosten für deine Fahrt:</p>
+    <form>
+        <div class="form-group">
+            <label>Strecke (km):</label>
+            <input type="number" id="strecke" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Verbrauch (l/100 km):</label>
+            <input type="number" id="verbrauch" step="0.1" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Benzinpreis (CHF/l):</label>
+            <input type="number" id="preis" step="0.01" class="form-control" required>
+        </div>
+        <button type="button" id="berechnenBtn" class="btn btn-success mt-2">Berechnen</button>
+    </form>
 
-    <div id="resultBox" class="mt-4" style="display: none;">
-        <h4>Recognized sentiment:</h4>
-        <p class="lead">
-            <strong id="sentimentLabel">–</strong><br>
-            Trust value: <span id="sentimentScore">–</span>
-        </p>
+    <div id="ergebnis" class="mt-4" style="display:none;">
+        <h4>Ergebnis:</h4>
+        <p class="lead">Gesamtkosten: <strong><span id="kostenOutput">–</span> CHF</strong></p>
     </div>
 </div>
 </body>
