@@ -15,7 +15,6 @@ def calculate():
         preis = float(data.get("preis", 0))
 
         kosten = round((strecke / 100) * verbrauch * preis, 2)
-
         return jsonify({"kosten": kosten})
     except:
         return jsonify({"error": "Ungültige Eingabe"}), 400
